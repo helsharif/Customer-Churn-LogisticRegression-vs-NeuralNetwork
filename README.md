@@ -28,7 +28,7 @@ Notebook reference: :contentReference[oaicite:1]{index=1}
 - Python  
 - Pandas, NumPy  
 - scikit-learn (LogisticRegression, train/test split, metrics)  
-- **imbalanced-learn (SMOTE)**  
+- imbalanced-learn (SMOTE) 
 - TensorFlow / Keras  
 - Plotly (interactive visualizations)  
 - Statsmodels (coefficient significance testing)
