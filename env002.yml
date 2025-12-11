@@ -1,0 +1,33 @@
+name: env002
+channels:
+  - defaults
+dependencies:
+  - python=3.10
+  - dash
+  - folium
+  - gplearn
+  - holoviews
+  - ipympl
+  - ipywidgets
+  - jupyterlab
+  - matplotlib
+  - nbconvert
+  - numpy
+  - openpyxl
+  - pandas
+  - panel
+  - plotly
+  - scikit-learn
+  - scipy
+  - seaborn
+  - statsmodels
+  - sympy
+  - pathvalidate
+  - msgspec
+  - conda-forge::pyspark
+  - conda-forge::findspark
+  - nodejs
+  - boto3
+  - cloudpathlib
+  - imbalanced-learn
+prefix: /home/helsharif/miniconda3/envs/env002
