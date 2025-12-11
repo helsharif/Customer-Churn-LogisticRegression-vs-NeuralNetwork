@@ -1,81 +1,92 @@
-# Customer Churn Prediction & Retention Optimization  
-### SparkML • TensorFlow • MLflow • Databricks • Customer Analytics
+# Customer Churn Prediction with Logistic Regression & Neural Networks  
+### Handling Class Imbalance with SMOTE • Model Interpretability • Plotly Visualizations
 
-This repository contains an end-to-end customer churn modeling pipeline developed for a telecommunications provider serving 7,000+ home phone and internet customers. The project demonstrates how exploratory data analysis, machine learning, and production-grade pipelines can be combined to deliver actionable retention insights.
+This repository contains a complete end-to-end customer churn modeling workflow using **Python**, **scikit-learn**, **TensorFlow/Keras**, and **SMOTE** for imbalance handling. The project demonstrates how to clean and encode categorical data, engineer features, build baseline and advanced models, and interpret the key drivers of churn in a telecommunications dataset.
 
 ---
 
 ## ⭐ Project Overview  
-Churn is one of the most critical KPIs for subscription-based businesses, and preventing customer loss requires early, data-driven intervention. This project builds multiple models—including Logistic Regression, Neural Networks, and a scalable SparkML + MLflow workflow—to predict churn and identify the customer segments most at risk.
+Customer churn is a major cost driver in subscription-based businesses. In telecom, customers often leave early due to service quality, pricing, or contract structure. This project predicts which customers are most likely to churn and examines which features contribute most strongly to churn risk.
 
-The work includes:
-- Exploratory data analysis  
-- Feature engineering & class imbalance handling  
-- Baseline & advanced machine learning models  
-- Databricks SparkML pipeline  
-- MLflow experiment tracking  
-- Threshold optimization to improve recall on the churn class  
+The workflow includes:
+- Exploratory data analysis (EDA) with **Plotly**
+- Cleaning inconsistent values (e.g., *No internet service*, *No phone service*)
+- Numerical encoding + one-hot encoding of categorical variables
+- Scaling continuous variables (tenure, monthly charges, total charges)
+- Train/test splitting with stratification
+- **SMOTE** oversampling to balance the minority churn class
+- Baseline **Logistic Regression** model
+- **Feedforward Neural Network** using TensorFlow/Keras
+- Confusion matrices, F1-scores, and classification reports
+- Significance testing for logistic regression coefficients
+
+Notebook reference: :contentReference[oaicite:1]{index=1}
 
 ---
 
 ## 🔧 Tech Stack  
-- **Python**, Pandas, NumPy  
-- **TensorFlow / Keras** (Neural Networks)  
-- **SparkML on Databricks**  
-- **MLflow** (experiment tracking + model registry)  
-- Plotly for visualization  
+- Python  
+- Pandas, NumPy  
+- scikit-learn (LogisticRegression, train/test split, metrics)  
+- **imbalanced-learn (SMOTE)**  
+- TensorFlow / Keras  
+- Plotly (interactive visualizations)  
+- Statsmodels (coefficient significance testing)
 
 ---
 
 ## 📊 Dataset  
-Over **7,000 customer records** including demographics, service details, billing, contract type, and churn labels.
+**7,000+ telecom customer records** with:  
+- Demographics: gender, senior citizen, partner, dependents  
+- Services: phone, fiber optic, online security, streaming, tech support  
+- Contract & billing: contract type, payment method, paperless billing  
+- Charges: monthly charges, total charges  
+- Target variable: **Churn (Yes/No)**
 
-Key predictors include:  
-- contract type (month-to-month, annual)  
-- monthly charges & total charges  
-- internet service (DSL, fiber, none)  
-- tenure  
-- technical support & streaming services  
-- payment method and billing preferences  
-
----
-
-## 🧠 Modeling Approaches  
-
-### **1. Logistic Regression (Interpretable Baseline)**  
-- Provides explainable feature coefficients  
-- ~77% accuracy on the holdout test set  
-- F1 score (churn) in the low 0.60s  
-
-### **2. Neural Network (TensorFlow/Keras)**  
-- Three hidden layers + sigmoid output  
-- ~79% accuracy  
-- Slight improvement in macro F1 over the baseline  
-
-### **3. SparkML Pipeline + MLflow (Production-Ready)**  
-Implemented in Databricks to enable large-scale training and iteration.  
-Includes:
-- automated feature indexing & vector assembly  
-- distributed training  
-- MLflow experiment tracking (runs, hyperparameters, metrics, artifacts)  
-- threshold tuning to increase churn recall from ~50% → ~78%  
+Rows with missing or invalid values (e.g., `" "`) are cleaned and removed during preprocessing.
 
 ---
 
-## 🚀 Deployment & MLOps  
-The Databricks implementation demonstrates how a churn model can move from a prototype into a scalable environment:
+## 🧠 Modeling Approaches
 
-- Distributed feature engineering & model training  
-- MLflow tracking + model registry  
-- Precision–recall curve visualization  
-- Decision threshold optimization  
-- Reusable template for other customer analytics applications  
+### **1. Logistic Regression (Baseline Model)**  
+After preprocessing and SMOTE balancing:
+- Achieves strong interpretability  
+- Produces churn probability scores  
+- Generates a clean coefficient + p-value table to identify statistically significant predictors  
+- Uses Plotly to visualize coefficient magnitudes  
+
+Significant churn drivers often include:
+- Short tenure  
+- Month-to-month contracts  
+- Higher monthly charges  
+- Lack of tech support or online security
+
+(See notebook for the exact results.)  
 
 ---
 
-## 💡 Key Business Insights  
-- Customers on **month-to-month contracts** with **$70–$110/month charges** show the highest churn risk  
-- Many churn events occur during the **first month of service** → need for stronger onboarding  
-- Logistic Regression gives transparent insight into churn drivers (billing method, tenure, contract terms)  
-- Threshold tuning significantly improves recall on the churn class without excessive retention cost  
+### **2. Neural Network (TensorFlow)**  
+A simple feed-forward neural network using the same SMOTE-balanced data:  
+- 1 input layer  
+- Multiple hidden layers with ReLU  
+- Sigmoid output for binary classification  
+- Trained on scaled features  
+
+Performance is compared with logistic regression using:
+- Accuracy  
+- Precision/recall  
+- F1-scores  
+- Confusion matrices  
+
+---
+
+## 📈 Key Findings  
+From EDA and model outputs:
+- Many customers who churn do so **in their first month**, implying onboarding issues.  
+- Customers paying **$70–$110/month** churn more frequently.  
+- Month-to-month contract customers show significantly elevated churn risk.  
+- Logistic Regression provides transparent insights into which features drive behavior.  
+- SMOTE improves recall on the churn class without heavily degrading precision.
+
 
