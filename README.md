@@ -65,6 +65,7 @@ Significant churn drivers often include:
 (See notebook for the exact results.)  
 
 ---
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/df04dc1a-4bc8-45a3-adad-7cf06bd57361" />
 
 ### **2. Neural Network (TensorFlow)**  
 A simple feed-forward neural network using the same SMOTE-balanced data:  
